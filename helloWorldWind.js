@@ -1,6 +1,5 @@
-function globePoint(latitude, longitude) {
-    var placemarkLayer = new WorldWind.RenderableLayer("Placemark");
-    
+function globePoint(latitude, longitude, city) {
+    var placemarkLayer = new WorldWind.RenderableLayer(city);
     var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
     
     placemarkAttributes.imageOffset = new WorldWind.Offset(
@@ -16,10 +15,8 @@ function globePoint(latitude, longitude) {
     
                 var position = new WorldWind.Position(latitude, longitude, 100.0);
                 var placemark = new WorldWind.Placemark(position, false, placemarkAttributes);
-    
-                placemark.label = "Placemark\n" +
-                "Lat " + placemark.position.latitude.toPrecision(4).toString() + "\n" +
-                "Lon " + placemark.position.longitude.toPrecision(5).toString();
+
+                placemark.label = city + "\n";
             placemark.alwaysOnTop = true;          
     
             placemarkLayer.addRenderable(placemark);
@@ -31,4 +28,5 @@ wwd.addLayer(new WorldWind.BMNGOneImageLayer());
 wwd.addLayer(new WorldWind.BMNGLandsatLayer());
 wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
 wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
-wwd.addLayer(globePoint(35.6762, 139.6503));       
+
+wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo")); // Tokyo     
