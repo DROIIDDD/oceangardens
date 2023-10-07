@@ -11,7 +11,7 @@ function globePoint(latitude, longitude, city) {
     WorldWind.OFFSET_FRACTION, 0.5,
     WorldWind.OFFSET_FRACTION, 1.0);
 
-    placemarkAttributes.imageSource = WorldWind.configuration.baseUrl + "images/pushpins/plain-red.png";
+    placemarkAttributes.imageSource = WorldWind.configuration.baseUrl + "images/pushpins/plain-white.png";
 
     var position = new WorldWind.Position(latitude, longitude, 100.0);
     var placemark = new WorldWind.Placemark(position, false, placemarkAttributes);
@@ -25,9 +25,16 @@ function globePoint(latitude, longitude, city) {
 
 var wwd = new WorldWind.WorldWindow("canvasOne");
 wwd.addLayer(new WorldWind.BMNGOneImageLayer());
+wwd.addLayer(new WorldWind.BMNGLayer());
 wwd.addLayer(new WorldWind.BMNGLandsatLayer());
+var BMNGLayer = new WorldWind.BMNGLayer();
+var starFieldLayer = new WorldWind.StarFieldLayer();
+var atmosphereLayer = new WorldWind.AtmosphereLayer();
+wwd.addLayer(starFieldLayer);
+wwd.addLayer(atmosphereLayer); 
 wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
 wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
+
 
 wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo"));
 wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie"));
