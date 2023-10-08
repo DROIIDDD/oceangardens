@@ -66,7 +66,7 @@ var handlePick = function (o) {
             // Applications might use this information to determine whether the user wants to edit the label
             // or is merely picking the placemark as a whole.
             if (pickList.objects[p].labelPicked) {
-                console.log("Label picked");
+                //console.log("Label picked");
             }
 
             // Increment the number of items picked if a shape is picked.
@@ -76,7 +76,7 @@ var handlePick = function (o) {
         }
 
         if (numShapesPicked > 0) {
-            console.log(numShapesPicked + " shapes picked");
+            //console.log(numShapesPicked + " shapes picked");
         }
     }
 
@@ -100,7 +100,6 @@ wwd.addLayer(atmosphereLayer);
 wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
 wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
 
-
 wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo"));
 wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie"));
 wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman"));
@@ -122,8 +121,9 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd,
         var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
 
         // If only one thing is picked and it is the terrain, use a go-to animator to go to the picked location.
-        if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+        if (pickList.objects.length >= 1) {
             var position = pickList.objects[0].position;
+            console.log(position)
             wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
         }
 
