@@ -131,14 +131,17 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd,
         // relative to the upper left corner of the canvas rather than the upper left corner of the page.
         var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
         var handleGoTo = function(position){
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
             //console.log('goto');
             //console.log(position);
             if ((Math.abs(position.latitude - 35.6762) < 2) && (Math.abs(position.longitude - 139.6503) < 2)) {
                 console.log('clicked on tokyo');
-                location.replace("tokyo.html");
+                sleep(2000).then(() => { location.replace("tokyo.html"); });
             } else if  ((Math.abs(position.latitude - 37.6640) < 2) && (Math.abs(position.longitude - 127.9785) < 2)) {
                 console.log('clicked on Korea');
-                location.replace("korea.html");
+                sleep(2000).then(() => { location.replace("korea.html"); });
             }
         } 
 
