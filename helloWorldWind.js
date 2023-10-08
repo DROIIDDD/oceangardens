@@ -131,14 +131,18 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd,
         // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
         // relative to the upper left corner of the canvas rather than the upper left corner of the page.
         var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+        var handleGoTo = function(){
+            console.log('goto');
+            location.replace("tokyo.html");
+        } 
 
         // If only one thing is picked and it is the terrain, use a go-to animator to go to the picked location.
         if (pickList.objects.length >= 1) {
             var position = pickList.objects[0].position;
             console.log(position)
-            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
-            surfaceImageLayer.enabled = true;
-            pickList.objects[0].userObject.enabled = false;
+            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo);
+            //surfaceImageLayer.enabled = true;
+            //pickList.objects[0].userObject.enabled = false;
         }
 
 });
