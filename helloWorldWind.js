@@ -1,3 +1,5 @@
+var wwd = new WorldWind.WorldWindow("canvasOne");
+
 function globePoint(latitude, longitude, city) {
     var placemarkLayer = new WorldWind.RenderableLayer(city);
     var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
@@ -26,7 +28,6 @@ function globePoint(latitude, longitude, city) {
     return placemarkLayer;
 }
 
-var wwd = new WorldWind.WorldWindow("canvasOne");
 // Now set up to handle picking.
 var highlightedItems = [];
 
@@ -110,3 +111,20 @@ wwd.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea"));
 wwd.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand"));
 wwd.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay"));
 wwd.addLayer(globePoint(-12, 13, "Benegula Current, South Africa"));
+
+var clickRecognizer = new WorldWind.ClickRecognizer(wwd, 
+    function(recognizer) {
+        console.log('clicked');
+        var x = recognizer.clientX,
+        y = recognizer.clientY;
+        // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
+        // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+        var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+
+        // If only one thing is picked and it is the terrain, use a go-to animator to go to the picked location.
+        if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+            var position = pickList.objects[0].position;
+            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+        }
+
+});
