@@ -1,4 +1,4 @@
-var wwd = new WorldWind.WorldWindow("canvasOne");
+var tokyoWorld = new WorldWind.WorldWindow("canvasOne");
 
 function globePoint(latitude, longitude, city, isBlack) {
     var placemarkLayer = new WorldWind.RenderableLayer(city);
@@ -52,7 +52,7 @@ var handlePick = function (o) {
 
     // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
     // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-    var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+    var pickList = tokyoWorld.pick(tokyoWorld.canvasCoordinates(x, y));
     if (pickList.objects.length > 0) {
         redrawRequired = true;
     }
@@ -86,23 +86,23 @@ var handlePick = function (o) {
 
     // Update the window if we changed anything.
     if (redrawRequired) {
-        wwd.redraw(); // redraw to make the highlighting changes take effect on the screen
+        tokyoWorld.redraw(); // redraw to make the highlighting changes take effect on the screen
     }
 };
 // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
-wwd.addEventListener("mousemove", handlePick);
+tokyoWorld.addEventListener("mousemove", handlePick);
 
 
-wwd.addLayer(new WorldWind.BMNGOneImageLayer());
-wwd.addLayer(new WorldWind.BMNGLayer());
-wwd.addLayer(new WorldWind.BMNGLandsatLayer());
+tokyoWorld.addLayer(new WorldWind.BMNGOneImageLayer());
+tokyoWorld.addLayer(new WorldWind.BMNGLayer());
+tokyoWorld.addLayer(new WorldWind.BMNGLandsatLayer());
 var BMNGLayer = new WorldWind.BMNGLayer();
 var starFieldLayer = new WorldWind.StarFieldLayer();
 var atmosphereLayer = new WorldWind.AtmosphereLayer();
-wwd.addLayer(starFieldLayer);
-wwd.addLayer(atmosphereLayer); 
-wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
-wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
+tokyoWorld.addLayer(starFieldLayer);
+tokyoWorld.addLayer(atmosphereLayer); 
+tokyoWorld.addLayer(new WorldWind.CoordinatesDisplayLayer(tokyoWorld));
+tokyoWorld.addLayer(new WorldWind.ViewControlsLayer(tokyoWorld));
 
  // Create a surface image using a static image.
  var surfaceImage1 = new WorldWind.SurfaceImage(new WorldWind.Sector(33.6762, 37.6762, 134.6503,  144.6503),
@@ -114,26 +114,26 @@ var surfaceImageLayer = new WorldWind.RenderableLayer();
 surfaceImageLayer.displayName = "Surface Images";
 surfaceImageLayer.addRenderable(surfaceImage1);
 
-wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo", false));
-wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie", false));
-wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman", false));
-wwd.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula", false));
-wwd.addLayer(globePoint(64.9631, -19.0208, "Iceland", false));
-wwd.addLayer(globePoint(26.7313, -110.7122, "Gulf of California", false));
-wwd.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea", false));
-wwd.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand", false));
-wwd.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay", false));
-wwd.addLayer(globePoint(-12, 13, "Benegula Current, South Africa", false));
-wwd.addLayer(surfaceImageLayer);
+tokyoWorld.addLayer(globePoint(35.6762, 139.6503, "Tokyo", false));
+tokyoWorld.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie", false));
+tokyoWorld.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman", false));
+tokyoWorld.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula", false));
+tokyoWorld.addLayer(globePoint(64.9631, -19.0208, "Iceland", false));
+tokyoWorld.addLayer(globePoint(26.7313, -110.7122, "Gulf of California", false));
+tokyoWorld.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea", false));
+tokyoWorld.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand", false));
+tokyoWorld.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay", false));
+tokyoWorld.addLayer(globePoint(-12, 13, "Benegula Current, South Africa", false));
+tokyoWorld.addLayer(surfaceImageLayer);
 surfaceImageLayer.enabled = false;
 
-var clickRecognizer = new WorldWind.ClickRecognizer(wwd, 
+var clickRecognizer = new WorldWind.ClickRecognizer(tokyoWorld, 
     function(recognizer) {
         var x = recognizer.clientX,
         y = recognizer.clientY;
         // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
         // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-        var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+        var pickList = tokyoWorld.pick(tokyoWorld.canvasCoordinates(x, y));
         var handleGoTo = function(position){
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
@@ -176,7 +176,7 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd,
         // If only one thing is picked and it is the terrain, use a go-to animator to go to the picked location.
         if (pickList.objects.length >= 1) {
             var position = pickList.objects[0].position;
-            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo(position));
+            tokyoWorld.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo(position));
             //surfaceImageLayer.enabled = true;
             //pickList.objects[0].userObject.enabled = false;
         }
