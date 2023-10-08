@@ -1,4 +1,4 @@
-var tokyoWorld = new WorldWind.WorldWindow("canvasOne");
+var wwd = new WorldWind.WorldWindow("canvasOne");
 
 function globePoint(latitude, longitude, city, isBlack) {
     var placemarkLayer = new WorldWind.RenderableLayer(city);
@@ -52,7 +52,7 @@ var handlePick = function (o) {
 
     // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
     // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-    var pickList = tokyoWorld.pick(tokyoWorld.canvasCoordinates(x, y));
+    var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
     if (pickList.objects.length > 0) {
         redrawRequired = true;
     }
@@ -86,54 +86,43 @@ var handlePick = function (o) {
 
     // Update the window if we changed anything.
     if (redrawRequired) {
-        tokyoWorld.redraw(); // redraw to make the highlighting changes take effect on the screen
+        wwd.redraw(); // redraw to make the highlighting changes take effect on the screen
     }
 };
 // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
-tokyoWorld.addEventListener("mousemove", handlePick);
+wwd.addEventListener("mousemove", handlePick);
 
 
-tokyoWorld.addLayer(new WorldWind.BMNGOneImageLayer());
-tokyoWorld.addLayer(new WorldWind.BMNGLayer());
-tokyoWorld.addLayer(new WorldWind.BMNGLandsatLayer());
+wwd.addLayer(new WorldWind.BMNGOneImageLayer());
+wwd.addLayer(new WorldWind.BMNGLayer());
+wwd.addLayer(new WorldWind.BMNGLandsatLayer());
 var BMNGLayer = new WorldWind.BMNGLayer();
 var starFieldLayer = new WorldWind.StarFieldLayer();
 var atmosphereLayer = new WorldWind.AtmosphereLayer();
-tokyoWorld.addLayer(starFieldLayer);
-tokyoWorld.addLayer(atmosphereLayer); 
-tokyoWorld.addLayer(new WorldWind.CoordinatesDisplayLayer(tokyoWorld));
-tokyoWorld.addLayer(new WorldWind.ViewControlsLayer(tokyoWorld));
-
- // Create a surface image using a static image.
- var surfaceImage1 = new WorldWind.SurfaceImage(new WorldWind.Sector(33.6762, 37.6762, 134.6503,  144.6503),
- "images/Tokyo.jpg");
+wwd.addLayer(starFieldLayer);
+wwd.addLayer(atmosphereLayer); 
+wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
+wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
 
 
-// Add the surface images to a layer and the layer to the WorldWindow's layer list.
-var surfaceImageLayer = new WorldWind.RenderableLayer();
-surfaceImageLayer.displayName = "Surface Images";
-surfaceImageLayer.addRenderable(surfaceImage1);
+wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo", false));
+wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie", false));
+wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman", false));
+wwd.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula", false));
+wwd.addLayer(globePoint(64.9631, -19.0208, "Iceland", false));
+wwd.addLayer(globePoint(26.7313, -110.7122, "Gulf of California", false));
+wwd.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea", false));
+wwd.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand", false));
+wwd.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay", false));
+wwd.addLayer(globePoint(-12, 13, "Benegula Current, South Africa", false));
 
-tokyoWorld.addLayer(globePoint(35.6762, 139.6503, "Tokyo", false));
-tokyoWorld.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie", false));
-tokyoWorld.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman", false));
-tokyoWorld.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula", false));
-tokyoWorld.addLayer(globePoint(64.9631, -19.0208, "Iceland", false));
-tokyoWorld.addLayer(globePoint(26.7313, -110.7122, "Gulf of California", false));
-tokyoWorld.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea", false));
-tokyoWorld.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand", false));
-tokyoWorld.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay", false));
-tokyoWorld.addLayer(globePoint(-12, 13, "Benegula Current, South Africa", false));
-tokyoWorld.addLayer(surfaceImageLayer);
-surfaceImageLayer.enabled = false;
-
-var clickRecognizer = new WorldWind.ClickRecognizer(tokyoWorld, 
+var clickRecognizer = new WorldWind.ClickRecognizer(wwd, 
     function(recognizer) {
         var x = recognizer.clientX,
         y = recognizer.clientY;
         // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
         // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-        var pickList = tokyoWorld.pick(tokyoWorld.canvasCoordinates(x, y));
+        var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
         var handleGoTo = function(position){
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
@@ -142,43 +131,53 @@ var clickRecognizer = new WorldWind.ClickRecognizer(tokyoWorld,
             //console.log(position);
             if ((Math.abs(position.latitude - 35.6762) < 2) && (Math.abs(position.longitude - 139.6503) < 2)) {
                 console.log('clicked on tokyo');
-                sleep(1000).then(() => { location.replace("tokyo.html"); });
+                sleep(700).then(() => { location.replace("tokyo.html"); });
             } else if  ((Math.abs(position.latitude - 37.6640) < 2) && (Math.abs(position.longitude - 127.9785) < 2)) {
                 console.log('clicked on Korea');
-                sleep(1000).then(() => { location.replace("korea.html"); });
+                sleep(700).then(() => { location.replace("korea.html"); });
             } else if  ((Math.abs(position.latitude - 58.4880) < 2) && (Math.abs(position.longitude - 19.8633) < 2)) {
                 console.log('clicked on baltic_sea');
-                sleep(1000).then(() => { location.replace("baltic_sea.html"); });
+                sleep(700).then(() => { location.replace("baltic_sea.html"); });
             } else if  ((Math.abs(position.latitude - 26.7313) < 2) && (Math.abs(position.longitude - -110.7122) < 2)) {
                 console.log('clicked on gulf_of_cali');
-                sleep(1000).then(() => { location.replace("gulf_of_cali.html"); });
+                sleep(700).then(() => { location.replace("gulf_of_cali.html"); });
             } else if  ((Math.abs(position.latitude - 24.7143) < 2) && (Math.abs(position.longitude - 58.7374) < 2)) {
                 console.log('clicked on gulf_of_oman');
-                sleep(1000).then(() => { location.replace("gulf_of_oman.html"); });
+                sleep(700).then(() => { location.replace("gulf_of_oman.html"); });
             } else if  ((Math.abs(position.latitude - -39.3724) < 2) && (Math.abs(position.longitude - 177.3016) < 2)) {
                 console.log('clicked on hawke_bay');
-                sleep(1000).then(() => { location.replace("hawke_bay.html"); });
+                sleep(700).then(() => { location.replace("hawke_bay.html"); });
             } else if  ((Math.abs(position.latitude - 64.9631) < 2) && (Math.abs(position.longitude - -19.0208) < 2)) {
                 console.log('clicked on iceland');
-                sleep(1000).then(() => { location.replace("iceland.html"); });
+                sleep(700).then(() => { location.replace("iceland.html"); });
             } else if  ((Math.abs(position.latitude - 42.0669) < 2) && (Math.abs(position.longitude - -81.3399) < 2)) {
                 console.log('clicked on lake_eerie');
-                sleep(1000).then(() => { location.replace("lake_eerie.html"); });
+                sleep(700).then(() => { location.replace("lake_eerie.html"); });
             } else if  ((Math.abs(position.latitude - -35.1945) < 2) && (Math.abs(position.longitude - -56.7412) < 2)) {
                 console.log('clicked on rio_de_la_plata');
-                sleep(1000).then(() => { location.replace("rio_de_la_plata.html"); });
+                sleep(700).then(() => { location.replace("rio_de_la_plata.html"); });
             } else if  ((Math.abs(position.latitude - -12) < 2) && (Math.abs(position.longitude - 13) < 2)) {
                 console.log('clicked on south_africa');
-                sleep(1000).then(() => { location.replace("south_africa.html"); });
+                sleep(700).then(() => { location.replace("south_africa.html"); });
             }
         } 
 
         // If only one thing is picked and it is the terrain, use a go-to animator to go to the picked location.
         if (pickList.objects.length >= 1) {
             var position = pickList.objects[0].position;
-            tokyoWorld.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo(position));
+            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo(position));
             //surfaceImageLayer.enabled = true;
             //pickList.objects[0].userObject.enabled = false;
         }
 
+var screenOffset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 1, WorldWind.OFFSET_FRACTION, 0);
+var screenImage1 = new WorldWind.ScreenImage(screenOffset, "images/android-apps.png");
+screenImage1.imageOffset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 1, WorldWind.OFFSET_FRACTION, 0);
+screenImage1.imageScale = 1;
+
+var screenImageLayer = new WorldWind.RenderableLayer();
+screenImageLayer.displayName = "Screen Images";
+screenImageLayer.addRenderable(screenImage1);
+
+wwd.addLayer(screenImageLayer);
 });
