@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<body
+  style="background-image: url('https://oceancolor.gsfc.nasa.gov/gallery/feature/images/A2021071.GreatLakes.jpg');background-repeat: no-repeat;  background-attachment: fixed;background-size: cover;">
+
+  <button id="backButton" onmouseover="changeImg()" onclick="myFunction()"
+    style="padding: 0;border: none;background: none;">
+    <img id="backButtonImage" width="120" height="60" src="images/Screenshot 2023-10-08 at 11.52.46 AM.png"
+      alt="animal">
+  </button>
+
+  <script>
+    function myFunction() {
+      location.replace("globe.html");
+    }
+
+    function changeImg() {
+      var image = document.getElementById("backButtonImage");
+      image.width = "144";
+      image.height = "72";
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      sleep(500).then(() => { changeImgToOrg(); });
+    }
+    function changeImgToOrg() {
+      var image = document.getElementById("backButtonImage");
+      image.height = "60";
+      image.width = "120";
+    }
+  </script>
+
+  <p style="background-color: rgb(105, 102, 102);color:white;text-align:left;font-size:200%; width:300px;">
+    <b>At the end of winter the ice is nearly all gone from Lake Erie, and growing phytoplankton populations are revealed
+    mingling with suspended sediments in this relatively shallow Great Lake. </b>
+  </p>
+
+</body>
+
+</html>
