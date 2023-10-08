@@ -100,6 +100,16 @@ wwd.addLayer(atmosphereLayer);
 wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
 wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
 
+ // Create a surface image using a static image.
+ var surfaceImage1 = new WorldWind.SurfaceImage(new WorldWind.Sector(30.6762, 40.6762, 134.6503,  144.6503),
+ "images/Cool Android.png");
+
+
+// Add the surface images to a layer and the layer to the WorldWindow's layer list.
+var surfaceImageLayer = new WorldWind.RenderableLayer();
+surfaceImageLayer.displayName = "Surface Images";
+surfaceImageLayer.addRenderable(surfaceImage1);
+
 wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo"));
 wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie"));
 wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman"));
@@ -110,6 +120,8 @@ wwd.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea"));
 wwd.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand"));
 wwd.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay"));
 wwd.addLayer(globePoint(-12, 13, "Benegula Current, South Africa"));
+wwd.addLayer(surfaceImageLayer);
+surfaceImageLayer.enabled = false;
 
 var clickRecognizer = new WorldWind.ClickRecognizer(wwd, 
     function(recognizer) {
@@ -125,6 +137,8 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd,
             var position = pickList.objects[0].position;
             console.log(position)
             wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+            surfaceImageLayer.enabled = true;
+            pickList.objects[0].userObject.enabled = false;
         }
 
 });
