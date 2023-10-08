@@ -101,8 +101,8 @@ wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
 wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
 
  // Create a surface image using a static image.
- var surfaceImage1 = new WorldWind.SurfaceImage(new WorldWind.Sector(30.6762, 40.6762, 134.6503,  144.6503),
- "images/Cool Android.png");
+ var surfaceImage1 = new WorldWind.SurfaceImage(new WorldWind.Sector(33.6762, 37.6762, 134.6503,  144.6503),
+ "images/Tokyo.jpg");
 
 
 // Add the surface images to a layer and the layer to the WorldWindow's layer list.
