@@ -1,16 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body style="background-color: black;">
-        <canvas id="canvasTwo" width="1024" height="768" style="padding: 0; margin: auto; display: block; width: 1800px; height: 2400px; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-            Your browser does not support HTML5 Canvas.
-        </canvas>
-        <script 
-        src="https://files.worldwind.arc.nasa.gov/artifactory/web/0.9.0/worldwind.min.js"
-        type="text/javascript"></script>
-        <script src="tokyo.js" type="text/javascript">
-        </script>
-    </body>
+<html>
+
+<body
+    style="background-image: url('images/tokyo.png');background-repeat: no-repeat;  background-attachment: fixed;background-size: cover;">
+
+    <button id="backButton" onmouseover="changeImg()" onclick="myFunction()"
+        style="padding: 0;border: none;background: none;">
+        <img id="backButtonImage" width="120" height="60" src="images/Screenshot 2023-10-08 at 11.52.46 AM.png"
+            alt="animal">
+    </button>
+
+    <script>
+        function myFunction() {
+            location.replace("globe.html");
+        }
+
+        function changeImg() {
+            var image = document.getElementById("backButtonImage");
+            image.width = "144";
+            image.height = "72";
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            sleep(500).then(() => { changeImgToOrg(); });
+        }
+        function changeImgToOrg() {
+            var image = document.getElementById("backButtonImage");
+            image.height = "60";
+            image.width = "120";
+        }
+    </script>
+
+    <p style="background-color: rgb(105, 102, 102);color:white;text-align:left;font-size:200%; width:300px;">
+        <b>Sun glint on the ocean's surface around Tokyo, Japan reveals signs of surface and internal waves as well as ship wakes. </b>
+    </p>
+
+</body>
+
 </html>

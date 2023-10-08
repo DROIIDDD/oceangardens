@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html>
-<body>
 
-<button onclick="myFunction()">Go Back To Globe</button>
+<body
+  style="background-image: url('images/korea.png');background-repeat: no-repeat;  background-attachment: fixed;background-size: cover;">
 
-<script>
-function myFunction() {
-  location.replace("globe.html");
-}
-</script>
+  <button id="backButton" onmouseover="changeImg()" onclick="myFunction()"
+    style="padding: 0;border: none;background: none;">
+    <img id="backButtonImage" width="120" height="60" src="images/Screenshot 2023-10-08 at 11.52.46 AM.png"
+      alt="animal">
+  </button>
 
-<h2>The ocean around Korea Peninsula</h2>
+  <script>
+    function myFunction() {
+      location.replace("globe.html");
+    }
+
+    function changeImg() {
+      var image = document.getElementById("backButtonImage");
+      image.width = "144";
+      image.height = "72";
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      sleep(500).then(() => { changeImgToOrg(); });
+    }
+    function changeImgToOrg() {
+      var image = document.getElementById("backButtonImage");
+      image.height = "60";
+      image.width = "120";
+    }
+  </script>
+
+  <p style="background-color: rgb(105, 102, 102);color:white;text-align:left;font-size:200%; width:300px;">
+    <b>Aquaculture operations off the southern end of the Korean Peninsula superimpose geometric forms onto the tide-driven
+    swirls of suspended sediment and phytoplankton in this Landsat 8 image collected on February 19, 2021. </b>
+  </p>
 
 </body>
-</html> 
+
+</html>
