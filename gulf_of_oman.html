@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body style="background-image: url('images/LC08_L1TP_159041-043_20210223_20210223_01_RT.GulfOfOman.crop.small.jpg');background-repeat: no-repeat;  background-attachment: fixed;background-size: cover;">
 
-<button onclick="myFunction()">Go Back To Globe</button>
+<button id="backButton" onmouseover="changeImg()" onclick="myFunction()" style="padding: 0;border: none;background: none;">
+  <img id="backButtonImage" width="120" height="60" src="images/Screenshot 2023-10-08 at 11.52.46 AM.png" alt="animal">
+</button>
 
 <script>
 function myFunction() {
   location.replace("globe.html");
 }
+
+function changeImg() {
+  var image = document.getElementById("backButtonImage");
+  image.width = "144";
+  image.height = "72";
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  sleep(500).then(() => {  changeImgToOrg(); });
+}
+function changeImgToOrg() {
+  var image = document.getElementById("backButtonImage");
+  image.height = "60";
+  image.width = "120";
+}
 </script>
 
-<h2>The ocean around Gulf of Oman</h2>
+<p style="background-color: rgb(105, 102, 102);color:white;text-align:left;font-size:200%; width:300px;"><b>Anchorages off the coast of the United Arab Emirates and Oman speckle the above Landsat 8 image while spirals of phytoplankton mark the presence of eddies in the Gulf. </b></p>
 
 </body>
 </html> 

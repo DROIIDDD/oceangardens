@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body style="background-image: url('images/LC08_L1TP_191019-021_20200815_20200815_01_RT.GotLandInTheBaltic.crop.small.jpeg');background-repeat: no-repeat;  background-attachment: fixed;background-size: cover;">
 
-<button onclick="myFunction()">Go Back To Globe</button>
+<button id="backButton" onmouseover="changeImg()" onclick="myFunction()" style="padding: 0;border: none;background: none;">
+  <img id="backButtonImage" width="120" height="60" src="images/Screenshot 2023-10-08 at 11.52.46 AM.png" alt="animal">
+</button>
 
 <script>
 function myFunction() {
   location.replace("globe.html");
 }
+
+function changeImg() {
+  var image = document.getElementById("backButtonImage");
+  image.width = "144";
+  image.height = "72";
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  sleep(500).then(() => {  changeImgToOrg(); });
+}
+function changeImgToOrg() {
+  var image = document.getElementById("backButtonImage");
+  image.height = "60";
+  image.width = "120";
+}
 </script>
 
-<h2>The ocean around Baltic Sea</h2>
+<p style="background-color: rgb(105, 102, 102);color:white;text-align:left;font-size:200%; width:300px;">
+  <b>Another day, another view of Baltic cyanobacteria from Landsat 8. The above image (collected on August 15, 2020) depicts surface slicks of the harmful algal bloom around the Swedish island of Gotland. Click on it to get a much larger version with a locator map. </b>
+</p>
 
 </body>
 </html> 
