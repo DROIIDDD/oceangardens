@@ -125,22 +125,27 @@ surfaceImageLayer.enabled = false;
 
 var clickRecognizer = new WorldWind.ClickRecognizer(wwd, 
     function(recognizer) {
-        console.log('clicked');
         var x = recognizer.clientX,
         y = recognizer.clientY;
         // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
         // relative to the upper left corner of the canvas rather than the upper left corner of the page.
         var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-        var handleGoTo = function(){
-            console.log('goto');
-            location.replace("tokyo.html");
+        var handleGoTo = function(position){
+            //console.log('goto');
+            //console.log(position);
+            if ((Math.abs(position.latitude - 35.6762) < 2) && (Math.abs(position.longitude - 139.6503) < 2)) {
+                console.log('clicked on tokyo');
+                location.replace("tokyo.html");
+            } else if  ((Math.abs(position.latitude - 37.6640) < 2) && (Math.abs(position.longitude - 127.9785) < 2)) {
+                console.log('clicked on Korea');
+                location.replace("korea.html");
+            }
         } 
 
         // If only one thing is picked and it is the terrain, use a go-to animator to go to the picked location.
         if (pickList.objects.length >= 1) {
             var position = pickList.objects[0].position;
-            console.log(position)
-            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo);
+            wwd.goTo(new WorldWind.Location(position.latitude, position.longitude), handleGoTo(position));
             //surfaceImageLayer.enabled = true;
             //pickList.objects[0].userObject.enabled = false;
         }
