@@ -138,10 +138,34 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd,
             //console.log(position);
             if ((Math.abs(position.latitude - 35.6762) < 2) && (Math.abs(position.longitude - 139.6503) < 2)) {
                 console.log('clicked on tokyo');
-                sleep(2000).then(() => { location.replace("tokyo.html"); });
+                sleep(1000).then(() => { location.replace("tokyo.html"); });
             } else if  ((Math.abs(position.latitude - 37.6640) < 2) && (Math.abs(position.longitude - 127.9785) < 2)) {
                 console.log('clicked on Korea');
-                sleep(2000).then(() => { location.replace("korea.html"); });
+                sleep(1000).then(() => { location.replace("korea.html"); });
+            } else if  ((Math.abs(position.latitude - 58.4880) < 2) && (Math.abs(position.longitude - 19.8633) < 2)) {
+                console.log('clicked on baltic_sea');
+                sleep(1000).then(() => { location.replace("baltic_sea.html"); });
+            } else if  ((Math.abs(position.latitude - 26.7313) < 2) && (Math.abs(position.longitude - -110.7122) < 2)) {
+                console.log('clicked on gulf_of_cali');
+                sleep(1000).then(() => { location.replace("gulf_of_cali.html"); });
+            } else if  ((Math.abs(position.latitude - 24.7143) < 2) && (Math.abs(position.longitude - 58.7374) < 2)) {
+                console.log('clicked on gulf_of_oman');
+                sleep(1000).then(() => { location.replace("gulf_of_oman.html"); });
+            } else if  ((Math.abs(position.latitude - -39.3724) < 2) && (Math.abs(position.longitude - 177.3016) < 2)) {
+                console.log('clicked on hawke_bay');
+                sleep(1000).then(() => { location.replace("hawke_bay.html"); });
+            } else if  ((Math.abs(position.latitude - 64.9631) < 2) && (Math.abs(position.longitude - -19.0208) < 2)) {
+                console.log('clicked on iceland');
+                sleep(1000).then(() => { location.replace("iceland.html"); });
+            } else if  ((Math.abs(position.latitude - 42.0669) < 2) && (Math.abs(position.longitude - -81.3399) < 2)) {
+                console.log('clicked on lake_eerie');
+                sleep(1000).then(() => { location.replace("lake_eerie.html"); });
+            } else if  ((Math.abs(position.latitude - -35.1945) < 2) && (Math.abs(position.longitude - -56.7412) < 2)) {
+                console.log('clicked on rio_de_la_plata');
+                sleep(1000).then(() => { location.replace("rio_de_la_plata.html"); });
+            } else if  ((Math.abs(position.latitude - -12) < 2) && (Math.abs(position.longitude - 13) < 2)) {
+                console.log('clicked on south_africa');
+                sleep(1000).then(() => { location.replace("south_africa.html"); });
             }
         } 
 
