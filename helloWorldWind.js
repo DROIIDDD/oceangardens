@@ -1,6 +1,6 @@
 var wwd = new WorldWind.WorldWindow("canvasOne");
 
-function globePoint(latitude, longitude, city) {
+function globePoint(latitude, longitude, city, isBlack) {
     var placemarkLayer = new WorldWind.RenderableLayer(city);
     var placemarkAttributes = new WorldWind.PlacemarkAttributes(null);
     
@@ -13,13 +13,17 @@ function globePoint(latitude, longitude, city) {
     WorldWind.OFFSET_FRACTION, 0.5,
     WorldWind.OFFSET_FRACTION, 1.0);
 
-    placemarkAttributes.imageSource = "images/android-logo-file-android-dance-svg-7.png";
+    placemarkAttributes.imageSource = "images/525ac397ecad044e0bc07620 copy.png";
+    if (isBlack) {
+        placemarkAttributes.imageSource = "images/black-plane-computer-icons-android-roboto-clip-art-png-favpng-p4QeTA1gJgWCmNXuwmcFuzeWs.png"; 
+    }
 
     var position = new WorldWind.Position(latitude, longitude, 100.0);
     var placemark = new WorldWind.Placemark(position, false, placemarkAttributes);
     var highlightAttributes = new WorldWind.PlacemarkAttributes(placemarkAttributes);
     
-    highlightAttributes.imageScale = 1.2;
+    highlightAttributes.imageScale = 1.1;
+    highlightAttributes.imageSource = "images/android-logo-file-android-dance-svg-7.png";
     placemark.highlightAttributes = highlightAttributes;
     placemark.label = city + "\n";
     placemark.alwaysOnTop = true;          
@@ -110,16 +114,16 @@ var surfaceImageLayer = new WorldWind.RenderableLayer();
 surfaceImageLayer.displayName = "Surface Images";
 surfaceImageLayer.addRenderable(surfaceImage1);
 
-wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo"));
-wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie"));
-wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman"));
-wwd.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula"));
-wwd.addLayer(globePoint(64.9631, -19.0208, "Iceland"));
-wwd.addLayer(globePoint(26.7313, -110.7122, "Gulf of California"));
-wwd.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea"));
-wwd.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand"));
-wwd.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay"));
-wwd.addLayer(globePoint(-12, 13, "Benegula Current, South Africa"));
+wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo", false));
+wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie", false));
+wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman", false));
+wwd.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula", false));
+wwd.addLayer(globePoint(64.9631, -19.0208, "Iceland", false));
+wwd.addLayer(globePoint(26.7313, -110.7122, "Gulf of California", false));
+wwd.addLayer(globePoint(58.4880, 19.8633, "Baltic Sea", false));
+wwd.addLayer(globePoint(-39.3724, 177.3016, "Hawke Bay, New Zealand", false));
+wwd.addLayer(globePoint(-35.1945, -56.7412, "Rio de La Plata, Uruguay", false));
+wwd.addLayer(globePoint(-12, 13, "Benegula Current, South Africa", false));
 wwd.addLayer(surfaceImageLayer);
 surfaceImageLayer.enabled = false;
 
