@@ -106,7 +106,7 @@ wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
 
 
 wwd.addLayer(globePoint(35.6762, 139.6503, "Tokyo", false));
-wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Eerie", false));
+wwd.addLayer(globePoint(42.0669, -81.3399, "Lake Erie", false));
 wwd.addLayer(globePoint(24.7143, 58.7374, "Gulf of Oman", false));
 wwd.addLayer(globePoint(37.6640, 127.9785, "Korean Peninsula", false));
 wwd.addLayer(globePoint(64.9631, -19.0208, "Iceland", false));
